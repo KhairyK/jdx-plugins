@@ -1,23 +1,12 @@
-module.exports = function ({ types: t }) {
-  return {
-    visitor: {
-      MemberExpression(path) {
-        if (path.node.object.name === "konsol") {
-          path.node.object = t.identifier("console");
-        }
+const t = require("@babel/types");
 
-        const map = {
-          log: "log",
-          peringatan: "warn",
-          error: "error",
-          info: "info"
-        };
+function transformConsole(path) {
+  if(path.isMemberExpression() && path.node.object.name === "konsol") {
+    path.node.object = t.identifier("console");
+    const map = { log:"log", peringatan:"warn", error:"error", info:"info" };
+    const prop = path.node.property.name;
+    if(map[prop]) path.node.property = t.identifier(map[prop]);
+  }
+}
 
-        const propName = path.node.property.name;
-        if (map[propName]) {
-          path.node.property = t.identifier(map[propName]);
-        }
-      }
-    }
-  };
-};
+module.exports = transformConsole;

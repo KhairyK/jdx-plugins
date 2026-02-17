@@ -1,20 +1,30 @@
-module.exports = function ({ types: t }) {
-  return {
-    visitor: {
-      Identifier(path) {
-        if (path.node.name === "jika") path.replaceWith(t.identifier("if"));
-        if (path.node.name === "selain") path.replaceWith(t.identifier("else"));
-        if (path.node.name === "ulang") path.replaceWith(t.identifier("for"));
-        if (path.node.name === "selama") path.replaceWith(t.identifier("while"));
-      },
-      MemberExpression(path) {
-        if (path.node.object.name === "konsol") {
-          path.node.object = t.identifier("console");
-        }
-        const map = { log: "log", peringatan: "warn", error: "error", info: "info" };
-        const propName = path.node.property.name;
-        if (map[propName]) path.node.property = t.identifier(map[propName]);
-      }
+const parser = require("@babel/parser");
+const traverse = require("@babel/traverse").default;
+const generator = require("@babel/generator").default;
+
+const transformIfElse = require("./if");
+const transformLoop = require("./loop");
+const transformFunc = require("./func");
+const transformConsole = require("./console");
+
+function parseIndonesia(code) {
+  const ast = parser.parse(code, {
+    sourceType: "module",
+    plugins: ["jsx"]
+  });
+  
+  traverse(ast, {
+    Identifier(path) {
+      transformIfElse(path);
+      transformLoop(path);
+      transformFunc(path);
+    },
+    MemberExpression(path) {
+      transformConsole(path);
     }
-  };
-};
+  });
+  
+  return generator(ast).code;
+}
+
+module.exports = parseIndonesia;
