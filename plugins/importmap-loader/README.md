@@ -21,13 +21,13 @@ Supports:
 ### Using NPM
 
 ```bash
-npm install importmap-loader
+npm install @jdx-plugins/importmap-loader
 ```
 
 ### Or use directly in browser
 
 ```html
-<script type="module" src="./loadImportMaps.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@jdx-plugins/importmap-loader@0.1.0/dist/loader.js"></script>
 ```
 
 ---
@@ -37,7 +37,7 @@ npm install importmap-loader
 ## 1. Import the loader
 
 ```js
-import { loadImportMaps } from "importmap-loader";
+import { loadImportMaps } from "https://cdn.jsdelivr.net/npm/@jdx-plugins/importmap-loader@0.1.0/dist/loader.js";
 ```
 
 ---
@@ -53,6 +53,8 @@ await loadImportMaps({
   version: "1"
 });
 ```
+
+> [!NOTE]: You can use importmap CDN from [IMPM](https://impm.opendnf.cloud/)
 
 ---
 
@@ -140,7 +142,7 @@ await loadImportMaps({
 
 ```html
 <script type="module">
-  import { loadImportMaps } from "./loadImportMaps.js";
+  import { loadImportMaps } from "https://cdn.jsdelivr.net/npm/@jdx-plugins/importmap-loader@0.1.0/dist/loader.js";
 
   await loadImportMaps({
     maps: ["/importmap.json"]
