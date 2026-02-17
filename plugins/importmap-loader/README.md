@@ -1,9 +1,8 @@
 # 🚀 Import Map Loader
 
-![npm](https://img.shields.io/npm/v/importmap-loader)
-![license](https://img.shields.io/npm/l/importmap-loader)
-![downloads](https://img.shields.io/npm/dw/importmap-loader)
-![size](https://img.shields.io/bundlephobia/min/importmap-loader)
+![npm](https://img.shields.io/npm/v/@jdx-plugins/importmap-loader)
+![license](https://img.shields.io/npm/l/@jdx-plugins/importmap-loader)
+![downloads](https://img.shields.io/npm/dw/@jdx-plugins/importmap-loader)
 
 A tiny utility to **load, merge, cache, and extend Import Maps** at runtime.
 
