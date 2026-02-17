@@ -1,0 +1,45 @@
+{
+  "name": "@jdx-plugins/web-importmap-loader",
+  "version": "0.1.0",
+  "description": "Smart runtime import map loader with caching, wildcard support, and multi-map merging.",
+  "license": "Apache-2.0",
+  "author": "OpenDN Foundation",
+  "type": "module",
+
+  "main": "./dist/loader.js",
+  "exports": {
+    ".": "./dist/loader.js"
+  },
+
+  "files": [
+    "dist"
+  ],
+
+  "keywords": [
+    "importmap",
+    "import-maps",
+    "esm",
+    "module-loader",
+    "browser",
+    "loader",
+    "wildcard-import",
+    "runtime-importmap"
+  ],
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.comKhairyK/jdx-plugins/plugins/importmap-loader"
+  },
+
+  "bugs": {
+    "url": "https://github.com/KhairyK/jdx-plugins/issues"
+  },
+
+  "homepage": "https://github.com/KhairyK/jdx-plugins/blob/main/plugins/importmap-loader/README.md",
+
+  "engines": {
+    "node": ">=18"
+  },
+
+  "sideEffects": false
+}
