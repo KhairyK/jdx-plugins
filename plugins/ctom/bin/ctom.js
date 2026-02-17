@@ -67,10 +67,10 @@ function processFile(file, pattern, options, config) {
 program
   .name("ctom")
   .description("Convert CommonJS to ESM")
-  .version("7.0.0");
+  .version("1.0.0");
 
 program
-  .argument("<pattern>", "file glob pattern")
+  .argument("[pattern]", "file glob pattern")
   .option("-o, --output <dir>", "output directory")
   .option("-w, --watch", "watch mode")
   .option("--stdout", "print result only")
