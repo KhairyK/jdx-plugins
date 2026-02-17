@@ -40,6 +40,12 @@ function processFile(file, pattern, options, config) {
     console.log(chalk.gray("⏭ Skipped (already ESM):"), file);
     return;
   }
+  
+  if (!pattern || pattern.trim() === "") {
+    spinner.fail(chalk.red("❌ No pattern provided!"));
+    program.help({ error: true });
+    return;
+  }
 
   const result = convert(code);
 
