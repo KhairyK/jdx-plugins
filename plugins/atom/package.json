@@ -1,0 +1,71 @@
+{
+    "name": "@jdx-plugins/cli-atom",
+    "version": "0.1.0",
+    "description": "ATOM CLI — Lightweight AMD to ESM transformer powered by Acorn.",
+    "license": "Apache-2.0",
+    "author": "OpenDN Foundation",
+    "type": "module",
+    "bin": {
+        "atom": "bin/atom.js"
+    },
+    "funding": {
+        "type": "patreon",
+        "url": "https://patreon.com/Khairy47"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/KhairyK/jdx-plugins/tree/main/plugins/atom"
+    },
+    "bugs": {
+        "url": "https://github.com/KhairyK/jdx-plugins/issues"
+    },
+    "homepage": "https://github.com/KhairyK/jdx-plugins/tree/main/plugins/atom",
+    "engines": {
+        "node": ">=18"
+    },
+    "keywords": [
+        "amd",
+        "esm",
+        "amd-to-esm",
+        "module-transformer",
+        "javascript-modules",
+        "cli-tool",
+        "code-transform",
+        "legacy-migration",
+        "acorn",
+        "magic-string",
+        "requirejs",
+        "definejs",
+        "modern-js",
+        "jdx-plugins"
+    ],
+    "scripts": {
+        "start": "npm link && atom --help",
+        "dev": "node bin/atom.js --watch",
+        "test": "jest",
+        "lint": "eslint .",
+        "build": "node --check bin/atom.js",
+        "clean": "rm -rf node_modules",
+        "prepare": "npm run lint && npm run build"
+    },
+    "dependencies": {
+        "acorn": "^8.11.3",
+        "acorn-walk": "^8.3.2",
+        "magic-string": "^0.30.10",
+        "@babel/types": "^7.26.0",
+        "@babel/generator": "^7.26.0",
+        "commander": "^12.1.0",
+        "ora": "^8.0.1",
+        "chalk": "^5.3.0",
+        "picocolors": "^1.0.1",
+        "cli-progress": "^3.12.0",
+        "fast-glob": "^3.3.2",
+        "chokidar": "^4.0.1"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "eslint": "^9.6.0",
+        "@eslint/js": "^9.6.0", 
+        "prettier": "^3.8.1"
+    }
+}
