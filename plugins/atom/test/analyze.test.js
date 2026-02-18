@@ -1,4 +1,4 @@
-import { analyzeAMD } from "../src/core/analyzeAMD.js";
+import { analyzeAMD } from '../src/core/analyzeAMD.js';
 
 const code = `
 define("mod", ["a","b"], function(a,b){

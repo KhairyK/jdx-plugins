@@ -1,16 +1,20 @@
-import { Command } from "commander";
-import pc from "picocolors";
-import pkg from "../../package.json" assert { type: "json" };
+import { Command } from 'commander';
+import pc from 'picocolors';
+import { readFileSync } from 'fs';
 
-import { transformCommand } from "./commands/transform.js";
-import { watchCommand } from "./commands/watch.js";
+const pkg = JSON.parse(
+  readFileSync(new URL('../../package.json', import.meta.url))
+);
+
+import { transformCommand } from './transform.js';
+import { watchCommand } from './watch.js';
 
 export function runCLI() {
   const program = new Command();
 
   program
-    .name("atom")
-    .description(pc.cyan("⚛️ ATOM — AMD → ESM Transformer"))
+    .name('atom')
+    .description(pc.cyan('⚛️ ATOM — AMD → ESM Transformer'))
     .version(pkg.version);
 
   transformCommand(program);

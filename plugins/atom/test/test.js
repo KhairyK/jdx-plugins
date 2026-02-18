@@ -1,4 +1,6 @@
-define(["x"], function(x){
-  function hi(){ return x; }
-  return { hi };
-});
+import x from 'x';
+
+function hi() {
+  return x;
+}
+export { hi };
