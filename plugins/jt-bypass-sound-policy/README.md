@@ -9,6 +9,7 @@ It solves modern browser autoplay restrictions (like Chrome’s sound policy) an
 ## ✨ Features
 
 ### 🔓 Audio Unlock System
+
 - Automatically bypasses browser autoplay restrictions
 - Activates after first user interaction (click, touch, keypress)
 - Works across modern browsers
@@ -16,6 +17,7 @@ It solves modern browser autoplay restrictions (like Chrome’s sound policy) an
 ---
 
 ### ⚡ Enterprise Sound Engine
+
 - Web Audio API powered
 - Ultra-low latency playback
 - No overlapping audio lag
@@ -23,6 +25,7 @@ It solves modern browser autoplay restrictions (like Chrome’s sound policy) an
 ---
 
 ### 🎚️ Global Audio Controls
+
 - Adjustable volume
 - Mute / unmute toggle
 - Programmatic sound control API
@@ -30,12 +33,14 @@ It solves modern browser autoplay restrictions (like Chrome’s sound policy) an
 ---
 
 ### 🚀 Sound Preloading
+
 - Preloads audio buffers for instant playback
 - Eliminates network delays
 
 ---
 
 ### 🛡️ Anti-Spam Protection
+
 - Built-in cooldown system
 - Prevents rapid sound overlap
 
@@ -92,9 +97,9 @@ juiceToast.use(
       success: "/audio/ding.mp3",
       error: "/audio/error.mp3",
       warning: "/audio/warn.mp3",
-      info: "/audio/info.mp3"
-    }
-  })
+      info: "/audio/info.mp3",
+    },
+  }),
 );
 ```
 
@@ -147,12 +152,12 @@ engine.play("success");
 
 ## ⚙️ Configuration Options
 
-| Option | Type | Default | Description |
-|-------|------|--------|-------------|
-| `volume` | number | `0.6` | Global audio volume |
-| `cooldown` | number | `120` | Minimum delay between sound plays (ms) |
-| `preload` | boolean | `true` | Preload audio buffers |
-| `sounds` | object | built-in map | Sound URLs per toast type |
+| Option     | Type    | Default      | Description                            |
+| ---------- | ------- | ------------ | -------------------------------------- |
+| `volume`   | number  | `0.6`        | Global audio volume                    |
+| `cooldown` | number  | `120`        | Minimum delay between sound plays (ms) |
+| `preload`  | boolean | `true`       | Preload audio buffers                  |
+| `sounds`   | object  | built-in map | Sound URLs per toast type              |
 
 ---
 

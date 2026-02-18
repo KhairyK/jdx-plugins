@@ -82,11 +82,11 @@ ctom app.js --stdout
 
 ## ⚙️ CLI Options
 
-| Flag | Description |
-|------|-------------|
-| `-o, --output` | Output directory |
-| `-w, --watch` | Watch mode |
-| `--stdout` | Print result instead of writing file |
+| Flag           | Description                          |
+| -------------- | ------------------------------------ |
+| `-o, --output` | Output directory                     |
+| `-w, --watch`  | Watch mode                           |
+| `--stdout`     | Print result instead of writing file |
 
 ---
 
@@ -174,7 +174,7 @@ ctom.config.js
 
 ```js
 module.exports = {
-  skipESM: true
+  skipESM: true,
 };
 ```
 
@@ -222,7 +222,7 @@ Unlike regex-based converters, CTOM uses **AST parsing** which means:
 ✅ Accurate conversion  
 ✅ Safe for complex code  
 ✅ No false matches  
-✅ Production-ready reliability  
+✅ Production-ready reliability
 
 ---
 
@@ -238,7 +238,7 @@ If you find this project useful:
 
 ⭐ Star the repo  
 🐛 Report issues  
-🚀 Contribute improvements  
+🚀 Contribute improvements
 
 ---
 

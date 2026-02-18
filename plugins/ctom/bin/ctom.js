@@ -25,10 +25,7 @@ function loadConfig() {
 /* ================= ESM DETECTOR ================= */
 
 function isESM(code) {
-  return (
-    code.includes("import ") ||
-    code.includes("export ")
-  );
+  return code.includes("import ") || code.includes("export ");
 }
 
 /* ================= FILE PROCESSOR ================= */
@@ -40,7 +37,7 @@ function processFile(file, pattern, options, config) {
     console.log(chalk.gray("⏭ Skipped (already ESM):"), file);
     return;
   }
-  
+
   if (!pattern || pattern.trim() === "") {
     spinner.fail(chalk.red("❌ No pattern provided!"));
     program.help({ error: true });
@@ -49,9 +46,7 @@ function processFile(file, pattern, options, config) {
 
   const result = convert(code);
 
-  const baseDir = pattern.includes("/")
-    ? pattern.split("*")[0]
-    : ".";
+  const baseDir = pattern.includes("/") ? pattern.split("*")[0] : ".";
 
   let outputFile;
 
@@ -70,10 +65,7 @@ function processFile(file, pattern, options, config) {
 
 /* ================= CLI ================= */
 
-program
-  .name("ctom")
-  .description("Convert CommonJS to ESM")
-  .version("1.0.0");
+program.name("ctom").description("Convert CommonJS to ESM").version("1.0.0");
 
 program
   .argument("[pattern]", "file glob pattern")
@@ -95,8 +87,7 @@ program
     spinner.succeed(chalk.green(`✔ Found ${files.length} files`));
 
     const bar = new cliProgress.SingleBar({
-      format:
-        "Converting |{bar}| {percentage}% || {value}/{total} files"
+      format: "Converting |{bar}| {percentage}% || {value}/{total} files",
     });
 
     bar.start(files.length, 0);
@@ -123,23 +114,19 @@ program
       console.log(chalk.blue("\n👀 Watching for changes...\n"));
 
       const watcher = chokidar.watch(pattern, {
-        ignoreInitial: true
+        ignoreInitial: true,
       });
 
-      watcher.on("change", file => {
-        const spin = ora(
-          chalk.yellow(`Updating ${file}`)
-        ).start();
+      watcher.on("change", (file) => {
+        const spin = ora(chalk.yellow(`Updating ${file}`)).start();
 
         processFile(file, pattern, options, config);
 
         spin.succeed(chalk.green(`Updated ${file}`));
       });
 
-      watcher.on("add", file => {
-        const spin = ora(
-          chalk.yellow(`New file ${file}`)
-        ).start();
+      watcher.on("add", (file) => {
+        const spin = ora(chalk.yellow(`New file ${file}`)).start();
 
         processFile(file, pattern, options, config);
 

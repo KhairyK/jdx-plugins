@@ -9,7 +9,7 @@ function resolveWildcards(imports) {
 
       resolved[prefix] = {
         wildcard: true,
-        target: value.replace("*", "")
+        target: value.replace("*", ""),
       };
     } else {
       resolved[key] = value;
@@ -23,7 +23,7 @@ function expandWildcardImports(imports) {
   const final = {};
 
   const wildcards = [];
-  
+
   for (const [key, val] of Object.entries(imports)) {
     if (typeof val === "object" && val.wildcard) {
       wildcards.push({ prefix: key, target: val.target });
@@ -57,10 +57,7 @@ async function fetchWithCache(url, version = "1") {
 }
 
 async function loadImportMaps(options = {}) {
-  const {
-    maps = [],
-    version = "1"
-  } = options;
+  const { maps = [], version = "1" } = options;
 
   const merged = { imports: {}, scopes: {} };
 

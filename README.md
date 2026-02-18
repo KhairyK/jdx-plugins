@@ -2,16 +2,16 @@
 
 > Official plugin registry and ecosystem hub for the **Open-source platform**.
 
-  ![license](https://img.shields.io/badge/license-BSD--2--Clause-blue)
-  ![registry](https://img.shields.io/badge/registry-JDX-orange)
-  ![status](https://img.shields.io/badge/status-active-success)
-  ![maintained](https://img.shields.io/badge/maintained-yes-green)
-  ![plugins](https://img.shields.io/badge/plugins-2-brightgreen)
-  ![version](https://img.shields.io/badge/version-1.0.0-blue)
-  ![GitHub stars](https://img.shields.io/github/stars/KhairyK/jdx-plugins?style=social)
-  ![GitHub forks](https://img.shields.io/github/forks/KhairyK/jdx-plugins?style=social)
-  ![GitHub issues](https://img.shields.io/github/issues/KhairyK/jdx-plugins)
-  ![GitHub last commit](https://img.shields.io/github/last-commit/KhairyK/jdx-plugins)
+![license](https://img.shields.io/badge/license-BSD--2--Clause-blue)
+![registry](https://img.shields.io/badge/registry-JDX-orange)
+![status](https://img.shields.io/badge/status-active-success)
+![maintained](https://img.shields.io/badge/maintained-yes-green)
+![plugins](https://img.shields.io/badge/plugins-2-brightgreen)
+![version](https://img.shields.io/badge/version-1.0.0-blue)
+![GitHub stars](https://img.shields.io/github/stars/KhairyK/jdx-plugins?style=social)
+![GitHub forks](https://img.shields.io/github/forks/KhairyK/jdx-plugins?style=social)
+![GitHub issues](https://img.shields.io/github/issues/KhairyK/jdx-plugins)
+![GitHub last commit](https://img.shields.io/github/last-commit/KhairyK/jdx-plugins)
 
 ---
 

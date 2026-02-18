@@ -6,7 +6,7 @@ import * as t from "@babel/types";
 export function convert(code) {
   const ast = parse(code, {
     sourceType: "module",
-    plugins: ["jsx"]
+    plugins: ["jsx"],
   });
 
   traverse(ast, {
@@ -28,20 +28,20 @@ export function convert(code) {
         if (t.isIdentifier(decl.id)) {
           const importDecl = t.importDeclaration(
             [t.importDefaultSpecifier(decl.id)],
-            t.stringLiteral(moduleName)
+            t.stringLiteral(moduleName),
           );
           path.replaceWith(importDecl);
         }
 
         // const { readFile } = require("fs")
         if (t.isObjectPattern(decl.id)) {
-          const specifiers = decl.id.properties.map(prop =>
-            t.importSpecifier(prop.value, prop.key)
+          const specifiers = decl.id.properties.map((prop) =>
+            t.importSpecifier(prop.value, prop.key),
           );
 
           const importDecl = t.importDeclaration(
             specifiers,
-            t.stringLiteral(moduleName)
+            t.stringLiteral(moduleName),
           );
 
           path.replaceWith(importDecl);
@@ -58,9 +58,7 @@ export function convert(code) {
         node.left.object.name === "module" &&
         node.left.property.name === "exports"
       ) {
-        path.replaceWith(
-          t.exportDefaultDeclaration(node.right)
-        );
+        path.replaceWith(t.exportDefaultDeclaration(node.right));
       }
 
       // exports.foo
@@ -73,12 +71,12 @@ export function convert(code) {
         path.replaceWith(
           t.exportNamedDeclaration(
             t.variableDeclaration("const", [
-              t.variableDeclarator(t.identifier(name), node.right)
-            ])
-          )
+              t.variableDeclarator(t.identifier(name), node.right),
+            ]),
+          ),
         );
       }
-    }
+    },
   });
 
   return generate(ast, { retainLines: true }).code;

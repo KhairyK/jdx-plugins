@@ -27,7 +27,10 @@ npm install @jdx-plugins/importmap-loader
 ### Or use directly in browser
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@jdx-plugins/importmap-loader@0.1.0/dist/loader.js"></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/@jdx-plugins/importmap-loader@0.1.0/dist/loader.js"
+></script>
 ```
 
 ---
@@ -46,11 +49,8 @@ import { loadImportMaps } from "https://cdn.jsdelivr.net/npm/@jdx-plugins/import
 
 ```js
 await loadImportMaps({
-  maps: [
-    "/importmap.json",
-    "/vendor.importmap.json"
-  ],
-  version: "1"
+  maps: ["/importmap.json", "/vendor.importmap.json"],
+  version: "1",
 });
 ```
 
@@ -122,7 +122,7 @@ Just bump the version:
 ```js
 await loadImportMaps({
   maps: ["/importmap.json"],
-  version: "2"
+  version: "2",
 });
 ```
 
@@ -145,7 +145,7 @@ await loadImportMaps({
   import { loadImportMaps } from "https://cdn.jsdelivr.net/npm/@jdx-plugins/importmap-loader@0.1.0/dist/loader.js";
 
   await loadImportMaps({
-    maps: ["/importmap.json"]
+    maps: ["/importmap.json"],
   });
 
   const { default: app } = await import("app/main.js");
