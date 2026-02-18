@@ -1,6 +1,0 @@
-{
-    "name": "@jdx-plugins/utils-diagold",
-    "version": "0.1.0",
-    "type": "module",
-    "module": "./dist/diagold.esm.js"
-}
