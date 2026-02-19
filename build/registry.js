@@ -85,7 +85,7 @@ function main() {
     const outPath = path.join(OUT_DIR, `${name}.json`);
     fs.writeFileSync(outPath, JSON.stringify(cleaned, null, 2));
     
-    console.info("ℹ️ Info: Generating Tarball && Metadata")
+    console.info("ℹ️ Info: Generating", name);
     console.log("✔ Generated:", outPath);
   }
 }
