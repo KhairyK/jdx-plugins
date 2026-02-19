@@ -1,0 +1,139 @@
+#!/usr/bin/env bash
+set -e
+
+# ==========================
+# Classic Progress Bar with ETA
+# ==========================
+progress_bar() {
+  local duration=$1        # total duration estimate in seconds
+  local width=${2:-40}     # bar width
+  local start_time=$(date +%s)
+
+  for ((i=0; i<=width; i++)); do
+    percent=$(( i * 100 / width ))
+    done_chars=$((i))
+    left_chars=$((width - i))
+    bar=$(printf "%0.s#" $(seq 1 $done_chars))
+    empty=$(printf "%0.s-" $(seq 1 $left_chars))
+
+    # ETA calculation
+    current_time=$(date +%s)
+    elapsed=$((current_time - start_time))
+    eta=$(( (duration * (width - i) / width) - elapsed ))
+    [ $eta -lt 0 ] && eta=0
+
+    printf "\r[%s%s] %3d%% | ETA: %ds" "$bar" "$empty" "$percent" "$eta"
+
+    sleep $(bc -l <<< "$duration/$width")
+  done
+  echo ""
+}
+
+# ==========================
+# Spinner
+# ==========================
+spinner() {
+  local pid=$1
+  local delay=0.1
+  local spinstr='|/-\'
+  while kill -0 $pid 2>/dev/null; do
+    for i in $(seq 0 3); do
+      printf "\r%s " "${spinstr:i:1}"
+      sleep $delay
+    done
+  done
+  echo ""
+}
+
+# ==========================
+# Parse Arguments
+# ==========================
+PLUGINS=()
+LINK=false
+IS_CLI=true
+
+for arg in "$@"; do
+  case $arg in
+    --plugins=*)
+      IFS=',' read -ra PLUGINS <<< "${arg#*=}"
+      ;;
+    --link=true)
+      LINK=true
+      ;;
+    --link=false)
+      LINK=false
+      ;;
+    --isCli=true)
+      IS_CLI=true
+      ;;
+    --isCli=false)
+      IS_CLI=false
+      ;;
+  esac
+done
+
+if [ ${#PLUGINS[@]} -eq 0 ]; then
+  echo "❌ No plugin specified! Use --plugins=<plugins-name>"
+  exit 1
+fi
+
+echo ""
+echo "==============================="
+echo "   JDX Dependency Installer"
+echo "==============================="
+echo ""
+
+# ==========================
+# Plugin Loop
+# ==========================
+for PLUGIN in "${PLUGINS[@]}"; do
+  PLUGIN_PATH="$HOME/jdx-plugins/plugins/$PLUGIN"
+
+  echo "📂 Going to plugin: $PLUGIN..."
+  if [ ! -d "$PLUGIN_PATH" ]; then
+    echo "❌ Plugin not found: $PLUGIN_PATH"
+    continue
+  fi
+  cd "$PLUGIN_PATH"
+
+  # ==========================
+  # Install dependencies
+  # ==========================
+  echo "📦 Installing dependencies..."
+  npm install --silent &
+  pid=$!
+  progress_bar 5
+  wait $pid
+
+  # ==========================
+  # Optional link
+  # ==========================
+  if [ "$LINK" = true ]; then
+    echo "🔗 Linking CLI..."
+    npm link &
+    pid=$!
+    progress_bar 3
+    wait $pid
+  fi
+
+  # ==========================
+  # Optional CLI test
+  # ==========================
+  if [ "$IS_CLI" = true ]; then
+    echo "🧪 Testing CLI..."
+    "$PLUGIN" --help >/dev/null 2>&1 || true
+    CODE=$?
+
+    if [ "$CODE" -eq 0 ]; then
+      echo "✅ $PLUGIN Test Completed. Exit code 0, Yayyy :)"
+    else
+      echo "❌ $PLUGIN Test Failed. Exit code $CODE, nooo :("
+    fi
+    echo ""
+  else
+    echo "ℹ Skipping CLI test"
+    echo ""
+  fi
+done
+
+echo "🎉 All done!"
