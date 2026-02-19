@@ -1,0 +1,20 @@
+{
+  "name": "stringfyr",
+  "version": "1.0.0",
+  "description": "Stringfyr is a high-performance, lightweight string utility library providing a comprehensive set of functions for string manipulation.",
+  "main": "dist/stringfyr.cjs.js",
+  "module": "dist/stringfyr.esm.js",
+  "browser": "dist/stringfyr.umd.js",
+  "author": "OpenDN Foundation",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KhairyK/jdx-plugins/tree/main/plugins/stringfyr"
+  },
+  "download": "https://jdx-registry.opendnf.cloud/t/stringfyr.tgz",
+  "dist": {
+    "tarball": "https://jdx-registry.opendnf.cloud/t/stringfyr.tgz",
+    "shasum": "f798d163f46e2ffefb12265b6feaa5365b94675a",
+    "integrity": "sha512-JDc8lH+us1DXhg9Ivl0KLA3jasBfQvIHmxVymjrhkHxK1lRo3vcSJaPKjorzXjtXr7qWFg7a5Tmg/hW0bZczRQ=="
+  }
+}

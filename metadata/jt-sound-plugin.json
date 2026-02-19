@@ -1,0 +1,34 @@
+{
+  "name": "@jdx-plugins/jt-sound-plugin",
+  "version": "0.1.1",
+  "description": "JDX Plugin for JuiceToast — Unlocks browser audio and provides enterprise sound engine support.",
+  "license": "MIT",
+  "author": "OpenDN Foundation",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KhairyK/jdx-sound-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KhairyK/jdx-sound-plugin/issues"
+  },
+  "homepage": "https://jdx.opendnf.cloud/jt/sound-plugin",
+  "peerDependencies": {
+    "juice-toast": "^1.3.2"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/OpenDN"
+  },
+  "download": "https://jdx-registry.opendnf.cloud/t/jt-sound-plugin.tgz",
+  "dist": {
+    "tarball": "https://jdx-registry.opendnf.cloud/t/jt-sound-plugin.tgz",
+    "shasum": "dfa54a4090fe818adda15e6fabf0a4cb424f8edb",
+    "integrity": "sha512-+75nWWh/J/BL0G18/Gy2hblB+IAA+EMXrToEDHDMwHcI7s68eJjXrqujuQzXGZXHy7lrV/14zalEcixNtY6n/A=="
+  }
+}

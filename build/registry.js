@@ -1,26 +1,32 @@
+/**
+ * JDX Registry Builder
+ * Auto pack tarball + generate metadata JSON
+ */
+
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
+import { execSync } from "child_process";
+import { fileURLToPath } from "url";
 
-const ROOT = "plugins";
-const OUT_DIR = "../metadata";
+/* =========================
+   FIX __dirname (ESM)
+========================= */
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+/* =========================
+   PATH CONFIG
+========================= */
+const PLUGINS_DIR = path.join(__dirname, "../plugins");
+const METADATA_DIR = path.join(__dirname, "../metadata");
+const TARBALL_DIR = path.join(__dirname, "../t");
+
 const REGISTRY = "https://jdx-registry.opendnf.cloud/t/";
-const TARBALL_DIR = "t";
 
-function walk(dir) {
-  let results = [];
-  for (const file of fs.readdirSync(dir)) {
-    const full = path.join(dir, file);
-    const stat = fs.statSync(full);
-
-    if (stat.isDirectory()) {
-      results = results.concat(walk(full));
-    } else if (file === "package.json") {
-      results.push(full);
-    }
-  }
-  return results;
-}
+/* =========================
+   HELPERS
+========================= */
 
 function sha512File(filePath) {
   const data = fs.readFileSync(filePath);
@@ -47,12 +53,45 @@ function cleanPackage(pkg) {
 
   pkg.license = fixLicense(pkg.license);
 
+  return pkg;
+}
+
+/* =========================
+   AUTO PACK TARBALL
+========================= */
+function packPlugin(dir) {
+  const pkgFile = path.join(dir, "package.json");
+  if (!fs.existsSync(pkgFile)) return null;
+
+  const pkg = JSON.parse(fs.readFileSync(pkgFile));
   const name = pkg.name.includes("/")
     ? pkg.name.split("/")[1]
     : pkg.name;
 
+  console.log(`📦 Packing ${name}...`);
+
+  const result = execSync("npm pack", {
+    cwd: dir,
+    encoding: "utf8"
+  }).trim();
+
+  const src = path.join(dir, result);
+  const dest = path.join(TARBALL_DIR, `${name}.tgz`);
+
+  fs.renameSync(src, dest);
+
+  console.log(`✔ Packed: ${name}.tgz`);
+
+  return { pkg, name, tarballPath: dest };
+}
+
+/* =========================
+   GENERATE METADATA
+========================= */
+function generateMetadata(pkg, name, tarballPath) {
+  pkg = cleanPackage(pkg);
+
   const tarballName = `${name}.tgz`;
-  const tarballPath = path.join(TARBALL_DIR, tarballName);
   const tarballURL = `${REGISTRY}${tarballName}`;
 
   pkg.download = tarballURL;
@@ -67,27 +106,41 @@ function cleanPackage(pkg) {
     };
   }
 
-  return { pkg, name };
+  const outPath = path.join(METADATA_DIR, `${name}.json`);
+  fs.writeFileSync(outPath, JSON.stringify(pkg, null, 2));
+
+  console.log(`📝 Metadata: ${name}.json`);
 }
 
+/* =========================
+   MAIN
+========================= */
 function main() {
-  if (!fs.existsSync(OUT_DIR)) {
-    fs.mkdirSync(OUT_DIR, { recursive: true });
+  console.log("🚀 JDX Registry Builder Starting...\n");
+
+  // Ensure folders
+  if (!fs.existsSync(METADATA_DIR)) fs.mkdirSync(METADATA_DIR, { recursive: true });
+  if (!fs.existsSync(TARBALL_DIR)) fs.mkdirSync(TARBALL_DIR, { recursive: true });
+
+  const plugins = fs.readdirSync(PLUGINS_DIR);
+
+  let count = 0;
+
+  for (const dirName of plugins) {
+    const full = path.join(PLUGINS_DIR, dirName);
+    const stat = fs.statSync(full);
+
+    if (!stat.isDirectory()) continue;
+
+    const packed = packPlugin(full);
+    if (!packed) continue;
+
+    generateMetadata(packed.pkg, packed.name, packed.tarballPath);
+    count++;
   }
 
-  const files = walk(ROOT);
-
-  for (const file of files) {
-    const pkg = JSON.parse(fs.readFileSync(file, "utf8"));
-
-    const { pkg: cleaned, name } = cleanPackage(pkg);
-
-    const outPath = path.join(OUT_DIR, `${name}.json`);
-    fs.writeFileSync(outPath, JSON.stringify(cleaned, null, 2));
-    
-    console.info("ℹ️ Info: Generating", name);
-    console.log("✔ Generated:", outPath);
-  }
+  console.log("\n✅ Done!");
+  console.log(`📦 Total plugins processed: ${count}`);
 }
 
 main();

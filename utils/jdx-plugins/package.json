@@ -1,0 +1,33 @@
+{
+  "name": "jdx-plugins-cli",
+  "version": "0.1.0",
+  "description": "JDX Plugins Package Manager CLI.",
+  "keywords": [
+    "cli",
+    "package-manager",
+    "node",
+    "plugins",
+    "installer"
+  ],
+  "homepage": "https://jdx.opendnf.cloud/cli",
+  "bugs": {
+    "url": "https://github.com/KhairyK/jdx-plugins/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KhairyK/jdx-plugins.git"
+  },
+  "license": "Apache-2.0",
+  "author": "OpenDN Foundation",
+  "type": "module",
+  "main": "bin/cli.js",
+  "bin": {
+    "jdx-plugins": "bin/cli.js"
+  },
+  "scripts": {
+    "test": "npm link && jdx-plugins"
+  },
+  "dependencies": {
+    "tar": "^7.5.9"
+  }
+}

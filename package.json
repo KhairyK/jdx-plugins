@@ -1,0 +1,9 @@
+{
+ "name": "jdx",
+ "version": "0.028.8263613526",
+ "description": "This is a package.jsonOn JDX Plugins,Not for NPM but for Script and CLI",
+ "bin": {
+   "jdx": "./cli/jdx.js"
+ },
+ "type": "module"
+}

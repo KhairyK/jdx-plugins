@@ -97,10 +97,92 @@ my-plugin/
 ## 📁 Repository Structure
 
 ```
-plugins/
- ├ index.json
- ├ */
- └ metadata/
+.
+├── LICENSE.md
+├── README.md
+├── build
+│   └── registry.js
+├── cli
+│   ├── jdx-install
+│   └── jdx.js
+├── metadata
+│   ├── atom.json
+│   ├── cli-atom.json
+│   ├── cli-ctom.json
+│   ├── ctom.json
+│   ├── jt-sound-plugin.json
+│   ├── stringfyr.json
+│   └── web-importmap-loader.json
+├── package.json
+├── plugins
+│   ├── atom
+│   │   ├── bin
+│   │   │   └── atom.js
+│   │   ├── package.json
+│   │   ├── src
+│   │   │   ├── cli
+│   │   │   │   ├── index.js
+│   │   │   │   ├── transform.js
+│   │   │   │   └── watch.js
+│   │   │   └── core
+│   │   │       ├── analyzeAMD.js
+│   │   │       ├── detectAMD.js
+│   │   │       └── transformAMD.js
+│   │   └── test
+│   │       ├── analyze.test.js
+│   │       ├── detect.test.js
+│   │       └── test.js
+│   ├── ctom
+│   │   ├── README.md
+│   │   ├── bin
+│   │   │   └── ctom.js
+│   │   ├── lib
+│   │   │   └── converter.js
+│   │   └── package.json
+│   ├── importmap-loader
+│   │   ├── README.md
+│   │   ├── dist
+│   │   │   └── loader.js
+│   │   └── package.json
+│   ├── jt-bypass-sound-policy
+│   │   ├── README.md
+│   │   ├── dist
+│   │   │   └── index.js
+│   │   └── package.json
+│   └── stringfyr
+│       ├── README.md
+│       ├── dist
+│       │   ├── stringfyr.amd.js
+│       │   ├── stringfyr.amd.js.map
+│       │   ├── stringfyr.cjs.js
+│       │   ├── stringfyr.cjs.js.map
+│       │   ├── stringfyr.esm.js
+│       │   ├── stringfyr.esm.js.map
+│       │   ├── stringfyr.umd.js
+│       │   ├── stringfyr.umd.js.map
+│       │   ├── stringfyr.umd.min.js
+│       │   └── stringfyr.umd.min.js.map
+│       ├── package.json
+│       ├── rollup.config.js
+│       └── src
+│           └── index.js
+├── runner.sh
+├── t
+│   ├── cli-atom.tgz
+│   ├── cli-ctom.tgz
+│   ├── jt-sound-plugin.tgz
+│   ├── stringfyr.tgz
+│   └── web-importmap-loader.tgz
+└── utils
+    └── jdx-plugins
+        ├── bin
+        │   └── cli.js
+        ├── core
+        │   └── installer.js
+        ├── package-lock.json
+        └── package.json
+
+26 directories, 58 files
 ```
 
 ---

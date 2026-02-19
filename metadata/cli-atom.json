@@ -1,0 +1,42 @@
+{
+  "name": "@jdx-plugins/cli-atom",
+  "version": "0.1.0",
+  "description": "ATOM CLI — Lightweight AMD to ESM transformer.",
+  "license": "Apache 2.0",
+  "author": "OpenDN Foundation",
+  "bin": {
+    "atom": "bin/atom.js"
+  },
+  "funding": {
+    "type": "patreon",
+    "url": "https://patreon.com/Khairy47"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KhairyK/jdx-plugins/tree/main/plugins/atom"
+  },
+  "bugs": {
+    "url": "https://github.com/KhairyK/jdx-plugins/issues"
+  },
+  "homepage": "https://github.com/KhairyK/jdx-plugins/tree/main/plugins/atom",
+  "dependencies": {
+    "@babel/generator": "^7.26.0",
+    "@babel/types": "^7.26.0",
+    "acorn": "^8.11.3",
+    "acorn-walk": "^8.3.2",
+    "chalk": "^5.3.0",
+    "chokidar": "^4.0.1",
+    "cli-progress": "^3.12.0",
+    "commander": "^12.1.0",
+    "fast-glob": "^3.3.2",
+    "magic-string": "^0.30.10",
+    "ora": "^8.0.1",
+    "picocolors": "^1.0.1"
+  },
+  "download": "https://jdx-registry.opendnf.cloud/t/cli-atom.tgz",
+  "dist": {
+    "tarball": "https://jdx-registry.opendnf.cloud/t/cli-atom.tgz",
+    "shasum": "fb51413b515b2b32fa54c4394ad65839cfd40ac9",
+    "integrity": "sha512-8jSq9QtqOBQiXl3Lx6N+21NOv+4YJi+rvVRpxYUSCrztNreTzhGIzsZkZG4l/0DPqY/aMoqrc5eNRHockOuNgw=="
+  }
+}
