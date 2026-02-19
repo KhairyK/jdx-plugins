@@ -1,7 +1,7 @@
 {
   "name": "@jdx-plugins/cli-atom",
   "version": "0.1.0",
-  "description": "ATOM CLI — Lightweight AMD to ESM transformer powered by Acorn.",
+  "description": "ATOM CLI — Lightweight AMD to ESM transformer.",
   "license": "Apache-2.0",
   "author": "OpenDN Foundation",
   "type": "module",
