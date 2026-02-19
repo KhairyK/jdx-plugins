@@ -6,7 +6,7 @@
 ![registry](https://img.shields.io/badge/registry-JDX-orange)
 ![status](https://img.shields.io/badge/status-active-success)
 ![maintained](https://img.shields.io/badge/maintained-yes-green)
-![plugins](https://img.shields.io/badge/plugins-4-brightgreen)
+![plugins](https://img.shields.io/badge/plugins-5-brightgreen)
 ![version](https://img.shields.io/badge/version-1.0.0-blue)
 ![GitHub stars](https://img.shields.io/github/stars/KhairyK/jdx-plugins?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/KhairyK/jdx-plugins?style=social)

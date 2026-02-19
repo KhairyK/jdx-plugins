@@ -1,0 +1,25 @@
+{
+    "name": "stringfyr",
+    "version": "1.0.0",
+    "description": "Stringfyr is a high-performance, lightweight string utility library providing a comprehensive set of functions for string manipulation.",
+    "main": "dist/stringfyr.cjs.js",
+    "module": "dist/stringfyr.esm.js",
+    "browser": "dist/stringfyr.umd.js",
+    "scripts": {
+        "build": "rollup -c"
+    },
+    "type": "module", 
+    "keywords": ["string", "manipulation", "utility", "utils", "lightweight", "library", "ESM", "CJS", "UMD", "AMD"],
+    "author": "OpenDN Foundation",
+    "license": "MIT",
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^24.0.0",
+        "@rollup/plugin-node-resolve": "^15.0.0",
+        "rollup": "^3.0.0",
+        "rollup-plugin-terser": "^7.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/KhairyK/jdx-plugins/tree/main/plugins/stringfyr"
+    }
+}

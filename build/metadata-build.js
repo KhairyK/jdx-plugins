@@ -3,9 +3,9 @@ import path from "path";
 import crypto from "crypto";
 
 const ROOT = "plugins";
-const OUT_DIR = "../../metadata";
-const REGISTRY = "https://jdx-registry.opendnf.cloud/-/";
-const TARBALL_DIR = "-";
+const OUT_DIR = "../metadata";
+const REGISTRY = "https://jdx-registry.opendnf.cloud/t/";
+const TARBALL_DIR = "t";
 
 function walk(dir) {
   let results = [];
