@@ -33,9 +33,8 @@
     "ora": "^8.0.1",
     "picocolors": "^1.0.1"
   },
-  "download": "https://jdx-registry.opendnf.cloud/t/cli-atom.tgz",
   "dist": {
-    "tarball": "https://jdx-registry.opendnf.cloud/t/cli-atom.tgz",
+    "tarball": "https://jdx-registry.opendnf.cloud/t/cli-atom-0.1.0.tgz",
     "shasum": "fb51413b515b2b32fa54c4394ad65839cfd40ac9",
     "integrity": "sha512-8jSq9QtqOBQiXl3Lx6N+21NOv+4YJi+rvVRpxYUSCrztNreTzhGIzsZkZG4l/0DPqY/aMoqrc5eNRHockOuNgw=="
   }

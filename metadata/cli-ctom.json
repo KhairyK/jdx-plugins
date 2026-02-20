@@ -23,9 +23,8 @@
     "ora": "^8.0.0",
     "chalk": "^5.6.2"
   },
-  "download": "https://jdx-registry.opendnf.cloud/t/cli-ctom.tgz",
   "dist": {
-    "tarball": "https://jdx-registry.opendnf.cloud/t/cli-ctom.tgz",
+    "tarball": "https://jdx-registry.opendnf.cloud/t/cli-ctom-1.0.0.tgz",
     "shasum": "d2767ccf811511801845df08d181c6c85a696575",
     "integrity": "sha512-uROjNyaf4j1dSwCnqTnWd8A7Cvo/aAnjVauFrtGnpbvoqlp25GSy1aV6f9TO5TO0QQsxDBxCxdapWkNwESiC8g=="
   }

@@ -25,9 +25,8 @@
     "type": "github",
     "url": "https://github.com/sponsors/OpenDN"
   },
-  "download": "https://jdx-registry.opendnf.cloud/t/jt-sound-plugin.tgz",
   "dist": {
-    "tarball": "https://jdx-registry.opendnf.cloud/t/jt-sound-plugin.tgz",
+    "tarball": "https://jdx-registry.opendnf.cloud/t/jt-sound-plugin-0.1.1.tgz",
     "shasum": "dfa54a4090fe818adda15e6fabf0a4cb424f8edb",
     "integrity": "sha512-+75nWWh/J/BL0G18/Gy2hblB+IAA+EMXrToEDHDMwHcI7s68eJjXrqujuQzXGZXHy7lrV/14zalEcixNtY6n/A=="
   }
