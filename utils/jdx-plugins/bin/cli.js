@@ -64,6 +64,7 @@ function publish() {
   const tgz = execSync("npm pack", { encoding: "utf8" }).trim();
 
   console.log("Packed:", tgz);
+  console.info("ℹ️ INFO: Go to https://github.com/KhairyK/jdx-plugins/issues to submit a plugins submission.");
 }
 
 /* =========================

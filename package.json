@@ -1,15 +1,21 @@
 {
- "name": "jdx-cli",
- "version": "0.014.2026220",
- "description": "This is a package.jsonOn JDX Plugins,Not for NPM but for Script and CLI",
- "bin": {
-   "jdx": "./cli/jdx.js", 
-   "scan-cjs": "./cli/cjs-scanner.js"
- },
- "script": {
-   "dependency": "npm install @babel/parser @babel/traverse fast-glob", 
-   "clean": "rm -rf node_modules package-lock.json", 
-   "compile-ts": "tsc"
- }, 
- "type": "module"
+  "name": "jdx-cli",
+  "version": "0.014.2026220",
+  "description": "CLI tools for JDX Plugins. Not intended for NPM publishing.",
+  "private": true,
+  "type": "module",
+
+  "bin": {
+    "jdx": "./cli/jdx.js",
+    "scan-cjs": "./cli/cjs-scanner.js"
+  },
+
+  "scripts": {
+    "dependency": "npm install @babel/parser @babel/traverse fast-glob",
+    "clean": "rm -rf node_modules package-lock.json",
+    "compile-ts": "tsc"
+  },
+
+  "author": "Sholehuddin Khairy",
+  "license": "BSD-2-Clause"
 }

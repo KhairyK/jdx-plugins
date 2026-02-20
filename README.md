@@ -1,6 +1,6 @@
 # 🧩 JavaScript Development eXtensions (JDX) Store
 
-> Official plugin registry and ecosystem hub for the **Open-source platform**.
+> Official plugin registry and ecosystem hub for the **JDX development toolchain**.
 
 ![license](https://img.shields.io/badge/license-BSD--2--Clause-blue)
 ![registry](https://img.shields.io/badge/registry-JDX-orange)
@@ -17,51 +17,48 @@
 
 ## 📦 About
 
-**JDX Plugins Store** is a centralized repository designed to host, distribute, and manage plugins for the Open-source ecosystem.
+**JDX Plugins Store** is a centralized registry designed to host, distribute, and manage plugins for the **JDX ecosystem**.
 
-It allows developers to:
-
-- 📥 Discover available plugins
-- 🚀 Publish their own plugins
-- 🔄 Manage versions easily
-- 🔒 Ensure plugin integrity & compatibility
+It serves as the official hub where developers can discover, publish, and maintain extensions that enhance the JDX toolchain.
 
 ---
 
 ## ✨ Features
 
 - 📚 Centralized plugin registry
-- ⚡ Fast plugin metadata lookup
-- 🔍 Plugin search & filtering
-- 📦 Version management
+- ⚡ Fast metadata lookup
+- 🔍 Plugin search and filtering
+- 📦 Version management system
 - 🛡️ Secure plugin distribution
-- 🧩 Easy integration with JDX tools
+- 🧩 Seamless integration with JDX CLI tools
 
 ---
 
 ## 🎯 Purpose
 
-This project exists to make the Open-source ecosystem:
+This project exists to make the JDX ecosystem:
 
 - More modular
 - More scalable
-- Easier for developers to extend
+- Easier to extend
 - Simpler to maintain long-term
+
+It provides a structured system for managing third-party extensions while keeping the ecosystem lightweight and developer-friendly.
 
 ---
 
 ## 🏗️ How It Works
 
-The store maintains a structured index of plugins containing:
+The store maintains a structured index of plugin metadata, including:
 
 - Plugin name
-- Version info
+- Version information
 - Description
-- Author
+- Author details
 - Download source
 - Compatibility data
 
-JDX tools can fetch this index to install plugins automatically.
+JDX CLI tools can fetch this registry index to install plugins automatically.
 
 ---
 
@@ -69,19 +66,29 @@ JDX tools can fetch this index to install plugins automatically.
 
 ### For Users
 
-Browse available plugins and install them via the NPM.
+Install plugins using the JDX CLI:
+
+```bash
+jdx-plugins install <plugin-name>
+```
 
 Example:
 
 ```bash
-npm install @jdx-plugins/<plugins-name>
+jdx-plugins install stringfyr
 ```
+
+> [!NOTE]
+> This CLI is currently under active development. Features, commands, and behaviors may change as the JDX ecosystem evolves.
+
+> [!WARNING]
+> Not recommended for production use yet.
 
 ---
 
 ### For Developers
 
-Publish your plugin by submitting metadata to the store index.
+To publish a plugin, submit its metadata to the store registry.
 
 Typical plugin structure:
 
@@ -94,117 +101,44 @@ my-plugin/
 
 ---
 
-## 📁 Repository Tree
+## 📁 Repository Structure
 
 ```
 jdx-plugins
-├── LICENSE.md
-├── README.md
-├── build
-│   └── registry.js
-├── cli
-│   ├── jdx-install
-│   └── jdx.js
-├── metadata
-│   ├── atom.json
-│   ├── cli-atom.json
-│   ├── cli-ctom.json
-│   ├── ctom.json
-│   ├── jt-sound-plugin.json
-│   ├── stringfyr.json
-│   └── web-importmap-loader.json
-├── package.json
-├── plugins
-│   ├── atom
-│   │   ├── bin
-│   │   │   └── atom.js
-│   │   ├── package.json
-│   │   ├── src
-│   │   │   ├── cli
-│   │   │   │   ├── index.js
-│   │   │   │   ├── transform.js
-│   │   │   │   └── watch.js
-│   │   │   └── core
-│   │   │       ├── analyzeAMD.js
-│   │   │       ├── detectAMD.js
-│   │   │       └── transformAMD.js
-│   │   └── test
-│   │       ├── analyze.test.js
-│   │       ├── detect.test.js
-│   │       └── test.js
-│   ├── ctom
-│   │   ├── README.md
-│   │   ├── bin
-│   │   │   └── ctom.js
-│   │   ├── lib
-│   │   │   └── converter.js
-│   │   └── package.json
-│   ├── importmap-loader
-│   │   ├── README.md
-│   │   ├── dist
-│   │   │   └── loader.js
-│   │   └── package.json
-│   ├── jt-bypass-sound-policy
-│   │   ├── README.md
-│   │   ├── dist
-│   │   │   └── index.js
-│   │   └── package.json
-│   └── stringfyr
-│       ├── README.md
-│       ├── dist
-│       │   ├── stringfyr.amd.js
-│       │   ├── stringfyr.amd.js.map
-│       │   ├── stringfyr.cjs.js
-│       │   ├── stringfyr.cjs.js.map
-│       │   ├── stringfyr.esm.js
-│       │   ├── stringfyr.esm.js.map
-│       │   ├── stringfyr.umd.js
-│       │   ├── stringfyr.umd.js.map
-│       │   ├── stringfyr.umd.min.js
-│       │   └── stringfyr.umd.min.js.map
-│       ├── package.json
-│       ├── rollup.config.js
-│       └── src
-│           └── index.js
-├── runner.sh
-├── t
-│   ├── cli-atom.tgz
-│   ├── cli-ctom.tgz
-│   ├── jt-sound-plugin.tgz
-│   ├── stringfyr.tgz
-│   └── web-importmap-loader.tgz
-└── utils
-    └── jdx-plugins
-        ├── bin
-        │   └── cli.js
-        ├── core
-        │   └── installer.js
-        ├── package-lock.json
-        └── package.json
+├── build/          # Registry generator
+├── cli/            # CLI commands
+├── metadata/       # Plugin metadata index
+├── plugins/        # Source of official plugins
+├── utils/          # Internal tooling core
+├── t/              # Cached plugin tarballs
+└── runner.sh       # Automation script
 ```
 
 ---
 
 ## 🧠 Philosophy
 
-The goal of JDX Plugins Store is to promote:
+JDX Plugins Store is built on these core principles:
 
 - Open contribution
 - Lightweight tooling
 - Developer freedom
 - Sustainable ecosystem growth
+- Simplicity over complexity
 
 ---
 
 ## 📜 License
 
-This project is licensed under the BSD 2-Clause License.
+This project is licensed under the **BSD 2-Clause License**.
 
 ---
 
 ## ❤️ Maintainer
 
-Created and maintained with passion by the Open-source community.
+Created and maintained by:
+
+**Sholehuddin Khairy** and contributors from the open-source community.
 
 ---
 
@@ -218,17 +152,27 @@ You can help by:
 - Improving documentation
 - Reporting issues
 - Suggesting new features
+- Enhancing security and stability
 
 ---
 
 ## 🔮 Future Plans
 
-- Plugin rating system
-- Dependency resolution
-- Verified publisher badges
-- Web-based plugin browser
-- Automatic compatibility checks
+Planned improvements for the ecosystem:
+
+- ⭐ Plugin rating and review system
+- 📦 Dependency resolution engine
+- 🛡️ Verified publisher badges
+- 🌐 Web-based plugin browser
+- 🔍 Automatic compatibility checks
+- ⚡ Faster registry indexing
 
 ---
 
-**JDX Plugins Store — Powering the Open-source ecosystem with extensibility ⚡**
+## ⚡ Vision
+
+JDX aims to evolve into a complete plugin ecosystem that empowers developers to build, share, and extend tools with minimal friction.
+
+---
+
+**JDX Plugins Store — Powering extensible development ecosystems.**
