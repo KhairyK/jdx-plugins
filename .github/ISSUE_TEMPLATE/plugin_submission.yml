@@ -1,0 +1,40 @@
+name: 📦 Submit New Plugin
+description: Register a new plugin in the ecosystem
+title: "[NEW PLUGIN] "
+labels: ["plugin", "submission"]
+
+body:
+  - type: input
+    id: plugin_name
+    attributes:
+      label: Plugin Name
+      placeholder: awesome-plugin
+    validations:
+      required: true
+
+  - type: input
+    id: repo
+    attributes:
+      label: Repository URL
+      placeholder: https://github.com/user/plugin
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Current Version
+      placeholder: 1.0.0
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Plugin Description
+      placeholder: What does this plugin do?
+
+  - type: textarea
+    id: install
+    attributes:
+      label: Installation Instructions
+      placeholder: |
+        pnpm add my-plugins

@@ -1,0 +1,72 @@
+name: Plugin Submission Review & Email
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  check-plugin-submission:
+    # hanya jalan untuk New Plugin Submission Issue
+    if: startsWith(github.event.issue.title, '[NEW PLUGIN]')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get Issue Details
+        id: issue
+        run: |
+          # ambil Plugin Name & Repo URL dari body issue
+          PLUGIN_NAME=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=Plugin Name:\s).*')
+          PLUGIN_REPO=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=Repository URL:\s).*')
+          echo "PLUGIN_NAME=$PLUGIN_NAME" >> $GITHUB_ENV
+          echo "PLUGIN_REPO=$PLUGIN_REPO" >> $GITHUB_ENV
+          echo "Plugin Name: $PLUGIN_NAME"
+          echo "Repo URL: $PLUGIN_REPO"
+
+      - name: Check if repository exists
+        id: repo_check
+        run: |
+          if curl -sSfL "$PLUGIN_REPO" >/dev/null; then
+            echo "repo_exists=true" >> $GITHUB_ENV
+          else
+            echo "repo_exists=false" >> $GITHUB_ENV
+          fi
+
+      - name: Validate repository
+        id: validate
+        run: |
+          if [ "$repo_exists" = "true" ]; then
+            # cek package.json dan README.md
+            if curl -sSfL "$PLUGIN_REPO/raw/main/package.json" >/dev/null 2>&1 && \
+               curl -sSfL "$PLUGIN_REPO/raw/main/README.md" >/dev/null 2>&1; then
+              echo "repo_valid=true" >> $GITHUB_ENV
+            else
+              echo "repo_valid=false" >> $GITHUB_ENV
+            fi
+          else
+            echo "repo_valid=false" >> $GITHUB_ENV
+          fi
+
+      - name: Send Email Notification (Gmail SMTP)
+        if: env.repo_valid == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.MAIL_USER }}
+          password: ${{ secrets.MAIL_PASS }}
+          subject: "✅ New Plugin Submission Verified: ${{ env.PLUGIN_NAME }}"
+          body: |
+            Plugin "${{ env.PLUGIN_NAME }}" submitted in Issue #${{ github.event.issue.number }} has been verified.
+            Repository is valid and safe.
+            
+            Repository URL: ${{ env.PLUGIN_REPO }}
+          to: musickhairy@gmail.com
+          from: ${{ secrets.MAIL_USER }}
+
+      - name: Comment on Issue
+        if: env.repo_valid == 'true'
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            ✅ Repo validated and email notification sent to maintainer.

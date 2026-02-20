@@ -71,7 +71,8 @@ function publish() {
 ========================= */
 function help() {
   console.log(`
-JDX Plugins CLI
+  𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐓𝐨 𝐉𝐃𝐗 𝐏𝐥𝐮𝐠𝐢𝐧𝐬! 
+  ________________________
 
 Commands:
   add <pkg>         Install plugin

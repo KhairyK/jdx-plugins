@@ -1,0 +1,62 @@
+name: 🐛 Plugin Bug Report
+description: Report a bug in a plugin
+title: "[PLUGIN BUG] "
+labels: ["plugin", "bug"]
+
+body:
+  - type: input
+    id: plugin_name
+    attributes:
+      label: Plugin Name
+      placeholder: my-awesome-plugin
+    validations:
+      required: true
+
+  - type: input
+    id: plugin_version
+    attributes:
+      label: Plugin Version
+      placeholder: 1.0.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install_method
+    attributes:
+      label: Installation Method
+      options:
+        - npm
+        - JDX CLI
+        - manual install
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      placeholder: Describe what went wrong
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      placeholder: |
+        1. Install plugin
+        2. Run command
+        3. Error occurs
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Error Output
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: Node.js version, OS, CLI version, etc.

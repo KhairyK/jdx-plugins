@@ -1,0 +1,45 @@
+name: 🗑️ Remove Plugin
+description: Request permanent removal of a plugin
+title: "[REMOVE PLUGIN] "
+labels: ["plugin", "removal"]
+
+body:
+  - type: input
+    id: plugin_name
+    attributes:
+      label: Plugin Name
+      placeholder: plugin-name
+    validations:
+      required: true
+
+  - type: dropdown
+    id: reason_type
+    attributes:
+      label: Removal Reason Type
+      options:
+        - Security risk
+        - Malicious code
+        - License violation
+        - Abandoned plugin
+        - Author request
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Detailed Reason
+      placeholder: Explain why this plugin should be removed
+    validations:
+      required: true
+
+  - type: input
+    id: proof
+    attributes:
+      label: Supporting Evidence (links, reports, etc.)
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Potential Impact on Users

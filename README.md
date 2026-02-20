@@ -1,4 +1,4 @@
-# 🧩 JDX Plugins Store
+# 🧩 JavaScript Development eXtensions (JDX) Store
 
 > Official plugin registry and ecosystem hub for the **Open-source platform**.
 
@@ -94,10 +94,10 @@ my-plugin/
 
 ---
 
-## 📁 Repository Structure
+## 📁 Repository Tree
 
 ```
-.
+jdx-plugins
 ├── LICENSE.md
 ├── README.md
 ├── build
@@ -181,8 +181,6 @@ my-plugin/
         │   └── installer.js
         ├── package-lock.json
         └── package.json
-
-26 directories, 58 files
 ```
 
 ---

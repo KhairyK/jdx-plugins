@@ -1,0 +1,50 @@
+name: 🔒 Security Report
+description: Report a security vulnerability in a plugin
+title: "[SECURITY] "
+labels: ["security"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ⚠️ Please DO NOT disclose sensitive details publicly.
+        If this issue contains critical vulnerability data, consider contacting maintainers privately.
+
+  - type: input
+    id: plugin_name
+    attributes:
+      label: Affected Plugin
+      placeholder: plugin-name
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Affected Version(s)
+      placeholder: 1.0.0, <=2.1.0
+
+  - type: textarea
+    id: vulnerability
+    attributes:
+      label: Vulnerability Description
+      placeholder: Describe the security issue
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Potential Impact
+      placeholder: What could an attacker do?
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      placeholder: How can this vulnerability be triggered?
+
+  - type: textarea
+    id: mitigation
+    attributes:
+      label: Suggested Fix / Mitigation
