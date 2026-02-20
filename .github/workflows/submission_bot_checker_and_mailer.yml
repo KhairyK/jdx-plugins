@@ -6,7 +6,6 @@ on:
 
 jobs:
   check-plugin-submission:
-    # hanya jalan untuk New Plugin Submission Issue
     if: startsWith(github.event.issue.title, '[NEW PLUGIN]')
     runs-on: ubuntu-latest
 
@@ -14,7 +13,6 @@ jobs:
       - name: Get Issue Details
         id: issue
         run: |
-          # ambil Plugin Name & Repo URL dari body issue
           PLUGIN_NAME=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=Plugin Name:\s).*')
           PLUGIN_REPO=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=Repository URL:\s).*')
           echo "PLUGIN_NAME=$PLUGIN_NAME" >> $GITHUB_ENV

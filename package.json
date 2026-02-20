@@ -1,9 +1,15 @@
 {
- "name": "jdx",
+ "name": "jdx-cli",
  "version": "0.014.2026220",
  "description": "This is a package.jsonOn JDX Plugins,Not for NPM but for Script and CLI",
  "bin": {
-   "jdx": "./cli/jdx.js"
+   "jdx": "./cli/jdx.js", 
+   "scan-cjs": "./cli/cjs-scanner.js"
  },
+ "script": {
+   "dependency": "npm install @babel/parser @babel/traverse fast-glob", 
+   "clean": "rm -rf node_modules package-lock.json", 
+   "compile-ts": "tsc"
+ }, 
  "type": "module"
 }

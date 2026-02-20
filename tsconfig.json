@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "ESNext",
+
+    "outDir": "ts-out",
+    "rootDir": "ts-plugins",
+
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+
+    "forceConsistentCasingInFileNames": true,
+
+    "resolveJsonModule": true,
+    "declaration": true,
+    "sourceMap": true
+  },
+
+  "include": ["ts-plugins"],
+  "exclude": ["node_modules", "ts-out", "dist"]
+}
