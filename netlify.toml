@@ -4,7 +4,7 @@
 # ================================
 
 [build]
-  command = "node build/registry.js"
+  command = "node build/tarball-metadata.js"
   publish = "."
 
 [build.environment]
