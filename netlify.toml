@@ -1,0 +1,63 @@
+# ================================
+# Netlify Config — JDX Plugins
+# Static Registry Hosting
+# ================================
+
+[build]
+  command = "node build/registry.js"
+  publish = "."
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# ================================
+# Redirects
+# ================================
+
+[[redirects]]
+  from = "/metadata/*"
+  to = "/metadata/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/plugins/*"
+  to = "/plugins/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/t/*"
+  to = "/t/:splat"
+  status = 200
+
+# ================================
+# Cache Optimization
+# ================================
+
+# Tarballs → cache VERY long
+[[headers]]
+  for = "/t/*.tgz"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# JSON registry → short cache
+[[headers]]
+  for = "*.json"
+  [headers.values]
+    Cache-Control = "public, max-age=300"
+
+# JS assets
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# ================================
+# Security Headers
+# ================================
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

@@ -58,7 +58,7 @@ function build(target) {
   }
 
   if (target === "registry") {
-    const script = path.join(__dirname, "../build/registry.js");
+    const script = path.join(__dirname, "../build/tarball-metadata.js");
 
     console.log("🚀 Running Registry Build...\n");
     run(`node "${script}"`);

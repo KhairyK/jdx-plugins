@@ -1,0 +1,9 @@
+{
+  "stringfyr": {
+    "latest": "0.1.0",
+    "integrity": "sha512-JDc8lH+us1DXhg9Ivl0KLA3jasBfQvIHmxVymjrhkHxK1lRo3vcSJaPKjorzXjtXr7qWFg7a5Tmg/hW0bZczRQ==", 
+    "versions": {
+      "0.1.0": "t/stringfyr-0.1.0.tgz"
+    }
+  }
+}

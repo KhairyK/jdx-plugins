@@ -64,11 +64,14 @@ function packPlugin(dir) {
   if (!fs.existsSync(pkgFile)) return null;
 
   const pkg = JSON.parse(fs.readFileSync(pkgFile));
-  const name = pkg.name.includes("/")
+
+  const rawName = pkg.name.includes("/")
     ? pkg.name.split("/")[1]
     : pkg.name;
 
-  console.log(`📦 Packing ${name}...`);
+  const version = pkg.version;
+
+  console.log(`📦 Packing ${rawName}@${version}...`);
 
   const result = execSync("npm pack", {
     cwd: dir,
@@ -76,25 +79,32 @@ function packPlugin(dir) {
   }).trim();
 
   const src = path.join(dir, result);
-  const dest = path.join(TARBALL_DIR, `${name}.tgz`);
+
+  const tarballName = `${rawName}-${version}.tgz`;
+  const dest = path.join(TARBALL_DIR, tarballName);
 
   fs.renameSync(src, dest);
 
-  console.log(`✔ Packed: ${name}.tgz`);
+  console.log(`✔ Packed: ${tarballName}`);
 
-  return { pkg, name, tarballPath: dest };
+  return {
+    pkg,
+    name: rawName,
+    version,
+    tarballName,
+    tarballPath: dest
+  };
 }
 
 /* =========================
    GENERATE METADATA
 ========================= */
-function generateMetadata(pkg, name, tarballPath) {
+function generateMetadata(pkg, name, version, tarballName, tarballPath) {
   pkg = cleanPackage(pkg);
 
-  const tarballName = `${name}.tgz`;
   const tarballURL = `${REGISTRY}${tarballName}`;
 
-  pkg.download = tarballURL;
+  pkg.dist = {};
 
   if (fs.existsSync(tarballPath)) {
     const hashes = sha512File(tarballPath);
@@ -135,7 +145,14 @@ function main() {
     const packed = packPlugin(full);
     if (!packed) continue;
 
-    generateMetadata(packed.pkg, packed.name, packed.tarballPath);
+    generateMetadata(
+      packed.pkg,
+      packed.name,
+      packed.version,
+      packed.tarballName,
+      packed.tarballPath
+    );
+    
     count++;
   }
 

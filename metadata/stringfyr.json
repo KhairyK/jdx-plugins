@@ -11,9 +11,9 @@
     "type": "git",
     "url": "https://github.com/KhairyK/jdx-plugins/tree/main/plugins/stringfyr"
   },
-  "download": "https://jdx-registry.opendnf.cloud/t/stringfyr.tgz",
+  "download": "https://jdx-registry.opendnf.cloud/t/stringfyr-0.1.0.tgz",
   "dist": {
-    "tarball": "https://jdx-registry.opendnf.cloud/t/stringfyr.tgz",
+    "tarball": "https://jdx-registry.opendnf.cloud/t/stringfyr-0.1.0.tgz",
     "shasum": "f798d163f46e2ffefb12265b6feaa5365b94675a",
     "integrity": "sha512-JDc8lH+us1DXhg9Ivl0KLA3jasBfQvIHmxVymjrhkHxK1lRo3vcSJaPKjorzXjtXr7qWFg7a5Tmg/hW0bZczRQ=="
   }

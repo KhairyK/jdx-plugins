@@ -24,7 +24,7 @@ case "$CMD" in
 
   build-registry)
     echo "🚀 Running Registry Build..."
-    node build/registry.js
+    node build/tarball-metadata.js
     ;;
 
   *)

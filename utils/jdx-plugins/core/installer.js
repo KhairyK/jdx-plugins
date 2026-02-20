@@ -3,7 +3,7 @@ import path from "path";
 import https from "https";
 import * as tar from "tar";
 
-const REGISTRY = "https://jdx-registry.opendnf.cloud";
+const REGISTRY = "https://jdx-registry.opendnf.cloud/";
 
 /* =============================
    FETCH JSON
@@ -12,6 +12,10 @@ function fetchJSON(url) {
   return new Promise((resolve, reject) => {
     https.get(url, res => {
       let data = "";
+      if (res.statusCode !== 200) {
+        reject(new Error(`Registry error: ${res.statusCode}`));
+        return;
+      }
 
       res.on("data", chunk => (data += chunk));
       res.on("end", () => resolve(JSON.parse(data)));
@@ -70,6 +74,7 @@ export async function installPackage(pkgSpec) {
 
   const tgz = meta.versions[version];
   const url = `${REGISTRY}/${tgz}`;
+  const integrity = info.intergrity;
 
   console.log(`📦 Installing ${name}@${version}`);
 
