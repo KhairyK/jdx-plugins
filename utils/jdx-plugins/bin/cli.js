@@ -79,7 +79,7 @@ Commands:
   add <pkg>         Install plugin
   rm <pkg>          Remove plugin
   update <pkg>      Update plugin
-  publish           Pack plugin
+  publish           Publish a plugins
 
 Supports:
   jdx-plugins add stringfyr
