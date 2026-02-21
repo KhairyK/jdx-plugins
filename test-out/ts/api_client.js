@@ -4,4 +4,3 @@ export async function fetchUsers() {
         throw new Error("Failed to fetch users");
     return res.json();
 }
-//# sourceMappingURL=api_client.js.map

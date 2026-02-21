@@ -8,4 +8,3 @@ export class Student {
         return `${this.name}, ${this.age} years old, grade: ${this.grade}`;
     }
 }
-//# sourceMappingURL=person.js.map

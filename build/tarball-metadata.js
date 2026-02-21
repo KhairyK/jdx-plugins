@@ -1,32 +1,15 @@
-/**
- * JDX Registry Builder
- * Auto pack tarball + generate metadata JSON
- */
-
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
 import { execSync } from "child_process";
 import { fileURLToPath } from "url";
 
-/* =========================
-   FIX __dirname (ESM)
-========================= */
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-/* =========================
-   PATH CONFIG
-========================= */
 const PLUGINS_DIR = path.join(__dirname, "../plugins");
 const METADATA_DIR = path.join(__dirname, "../metadata");
 const TARBALL_DIR = path.join(__dirname, "../t");
-
 const REGISTRY = "https://jdx-registry.opendnf.cloud/t/";
-
-/* =========================
-   HELPERS
-========================= */
 
 function sha512File(filePath) {
   const data = fs.readFileSync(filePath);
@@ -56,9 +39,6 @@ function cleanPackage(pkg) {
   return pkg;
 }
 
-/* =========================
-   AUTO PACK TARBALL
-========================= */
 function packPlugin(dir) {
   const pkgFile = path.join(dir, "package.json");
   if (!fs.existsSync(pkgFile)) return null;
@@ -96,25 +76,21 @@ function packPlugin(dir) {
   };
 }
 
-/* =========================
-   GENERATE METADATA
-========================= */
 function generateMetadata(pkg, name, version, tarballName, tarballPath) {
   pkg = cleanPackage(pkg);
 
-  const tarballURL = `${REGISTRY}${tarballName}`;
+  const tarballURL = tarballName; 
 
-  pkg.dist = {};
+  if (!pkg.versions) pkg.versions = {};
 
-  if (fs.existsSync(tarballPath)) {
-    const hashes = sha512File(tarballPath);
+  const hashes = sha512File(tarballPath);
 
-    pkg.dist = {
-      tarball: tarballURL,
-      shasum: hashes.shasum,
-      integrity: hashes.integrity
-    };
-  }
+  pkg.versions[version] = {
+    file: tarballName,
+    integrity: hashes.integrity
+  };
+
+  pkg.latest = version;
 
   const outPath = path.join(METADATA_DIR, `${name}.json`);
   fs.writeFileSync(outPath, JSON.stringify(pkg, null, 2));
@@ -122,9 +98,6 @@ function generateMetadata(pkg, name, version, tarballName, tarballPath) {
   console.log(`📝 Metadata: ${name}.json`);
 }
 
-/* =========================
-   MAIN
-========================= */
 function main() {
   console.log("🚀 JDX Registry Builder Starting...\n");
 

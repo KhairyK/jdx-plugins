@@ -1,0 +1,43 @@
+name: Auto Update Version on `package.json`
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+    branches:
+      - main
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Update package.json version
+        run: |
+          current=$(jq -r '.version' package.json)
+          
+          IFS='.' read -r major minor patch <<< "$current"
+          patch=$((patch + 1))
+          
+          date=$(date +%Y%m%d)
+          
+          new_version="$major.$minor.$date"
+          jq ".version = \"$new_version\"" package.json > package.tmp.json
+          mv package.tmp.json package.json
+          echo "New version: $new_version"
+
+      - name: Commit updated version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add package.json
+          git commit -m "chore: update version to $(jq -r '.version' package.json)" || echo "No changes"
+          git push

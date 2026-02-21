@@ -11,4 +11,3 @@ log(student.getInfo());
 fetchUsers()
     .then(users => log(`Fetched ${users.length} users`))
     .catch(err => log(err.message, "error"));
-//# sourceMappingURL=index.js.map
