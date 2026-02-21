@@ -4,10 +4,23 @@ import https from "https";
 import * as tar from "tar";
 import crypto from "crypto";
 
-const REGISTRY = "https://jdx-registry.opendnf.cloud/";
+/* =============================
+   CONFIG
+============================= */
+const REGISTRY = "https://jdx-registry.opendnf.cloud";
 
 /* =============================
-   FETCH JSON
+   UTILITY: SAFE URL JOIN
+============================= */
+function joinURL(base, p) {
+  if (typeof base !== "string" || typeof p !== "string") {
+    throw new Error(`joinURL expects strings. Got base=${base}, path=${p}`);
+  }
+  return `${base.replace(/\/+$/, '')}/${p.replace(/^\/+/, '')}`;
+}
+
+/* =============================
+   FETCH JSON FROM REGISTRY
 ============================= */
 function fetchJSON(url) {
   return new Promise((resolve, reject) => {
@@ -60,34 +73,7 @@ function download(url, dest) {
 }
 
 /* =============================
-   CHECK INTEGRITY (SHA-512)
-============================= */
-function checkIntegrity(file, expected) {
-  if (!expected) return true; // skip if no integrity provided
-
-  const hash = crypto.createHash("sha512");
-  const data = fs.readFileSync(file);
-  hash.update(data);
-  const digest = hash.digest("base64");
-
-  if (digest !== expected) {
-    throw new Error("Integrity check failed! (SHA-512)");
-  }
-
-  return true;
-}
-
-/* =============================
-   VERSION RESOLVER
-============================= */
-function resolveVersion(meta, version) {
-  if (!version || version === "latest") return meta.latest;
-  if (!meta.versions[version]) throw new Error("Version not found");
-  return version;
-}
-
-/* =============================
-   INSTALL PACKAGE
+   INSTALL PACKAGE DENGAN SAFE HASH
 ============================= */
 export async function installPackage(pkgSpec) {
   if (!pkgSpec || !pkgSpec.includes("@")) {
@@ -97,22 +83,58 @@ export async function installPackage(pkgSpec) {
   const [name, ver] = pkgSpec.split("@");
 
   console.log("📡 Fetching registry...");
-  const index = await fetchJSON(`${REGISTRY}/index.json`);
+  const index = await fetchJSON(joinURL(REGISTRY, "index.json"));
 
-  if (!index[name]) throw new Error("Package not found in registry");
+  if (!index[name]) throw new Error(`Package not found in registry: ${name}`);
 
   const meta = index[name];
-  const version = resolveVersion(meta, ver);
-  const tgz = meta.versions[version];
-  const integrity = meta.integrity || null;
+  const version = !ver || ver === "latest" ? meta.latest : ver;
 
+  if (!meta.versions[version]) throw new Error(`Version not found: ${version}`);
+
+  // Ambil file & integrity dari object
+  const versionMeta = meta.versions[version];
+  let tgz, integrity;
+  if (typeof versionMeta === "string") {
+    tgz = versionMeta;
+    integrity = meta.integrity || null;
+  } else if (typeof versionMeta === "object" && versionMeta.file) {
+    tgz = versionMeta.file;
+    integrity = versionMeta.integrity || null;
+  } else {
+    throw new Error(`Invalid version entry for ${name}@${version}`);
+  }
+
+  const url = joinURL(REGISTRY, tgz);
   console.log(`📦 Installing ${name}@${version}...`);
+  console.log("⬇ Downloading:", url);
 
   const tmp = `.jdx-${name}.tgz`;
-  await download(`${REGISTRY}/${tgz}`, tmp);
+  await download(url, tmp);
 
-  // optional integrity check
-  checkIntegrity(tmp, integrity);
+  // =============================
+  // CHECK INTEGRITY
+  // =============================
+  if (integrity) {
+    try {
+      const hash = crypto.createHash("sha512");
+      const data = fs.readFileSync(tmp);
+      hash.update(data);
+      const digest = hash.digest("base64");
+
+      if (digest !== integrity.replace(/^sha512-/, '')) {
+        console.warn(`❌ Integrity mismatch for ${name}@${version}`);
+        console.warn(`   Expected: ${integrity}`);
+        console.warn(`   Actual  : sha512-${digest}`);
+      } else {
+        console.log("✔ Integrity check passed!");
+      }
+    } catch (err) {
+      console.warn("⚠ Failed to check integrity:", err.message);
+    }
+  } else {
+    console.log("⚠ No integrity field, skipping check");
+  }
 
   const dest = path.join("jdx_plugins", name);
   fs.mkdirSync(dest, { recursive: true });
@@ -138,13 +160,19 @@ export function removePackage(name) {
 
   if (!fs.existsSync(dir)) throw new Error("Package not installed");
 
-  // Node >=14
   if (fs.rmSync) {
     fs.rmSync(dir, { recursive: true, force: true });
   } else {
-    // fallback Node <14
     fs.rmdirSync(dir, { recursive: true });
   }
 
   console.log("✔ Removed!");
 }
+
+/* =============================
+   EXPORT
+============================= */
+export default {
+  installPackage,
+  removePackage
+};

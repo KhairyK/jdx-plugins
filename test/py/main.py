@@ -1,4 +1,4 @@
-from math_utils import add, multiply
+from my_math import add, multiply
 from person import Student
 from logger import log, LogLevel
 from api_client import fetch_users
