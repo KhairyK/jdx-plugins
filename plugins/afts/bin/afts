@@ -1,0 +1,89 @@
+#!/usr/bin/env node
+
+import { program } from "commander";
+import fg from "fast-glob";
+import fs from "fs-extra";
+import * as babel from "@babel/core";
+import path from "path";
+import os from "os";
+import pLimit from "p-limit";
+import plugin from "../lib/plugins.js";
+
+/* =========================
+   PARALLEL LIMIT
+========================= */
+const concurrency = Math.min(8, Math.max(1, os.cpus()?.length || 1));
+const limit = pLimit(concurrency);
+
+/* =========================
+   GET FILES
+========================= */
+async function getFiles(input) {
+  // file mode
+  if (input.endsWith(".ts")) return [input];
+
+  // folder mode
+  return await fg("**/*.ts", {
+    cwd: input,
+    absolute: true,
+    ignore: ["**/node_modules/**", "**/dist/**"],
+  });
+}
+
+/* =========================
+   COMPILE ONE FILE
+========================= */
+async function compileFile(file, root) {
+  const code = await fs.readFile(file, "utf8");
+
+  const result = await babel.transformAsync(code, {
+    filename: file,
+    presets: ["@babel/preset-typescript"],
+    plugins: [plugin],
+
+    ast: false,
+    sourceMap: false,
+    comments: false,
+    compact: true,
+  });
+
+  const relative = root.endsWith(".ts")
+    ? path.basename(file)
+    : path.relative(root, file);
+
+  const outPath = path.join("dist", relative).replace(".ts", ".js");
+
+  await fs.ensureDir(path.dirname(outPath));
+  await fs.writeFile(outPath, result.code);
+
+  console.log("✔", relative);
+}
+
+/* =========================
+   CLI COMMAND
+========================= */
+program
+  .command("build <input>")
+  .description("Compile TS with runtime type check")
+  .action(async (input) => {
+    console.log("🔍 Scanning files...");
+
+    const files = await getFiles(input);
+
+    if (!files.length) {
+      console.log("No TS files found.");
+      return;
+    }
+
+    console.log(`⚡ Compiling ${files.length} files using ${concurrency} threads...\n`);
+
+    await Promise.all(
+      files.map((file) =>
+        limit(() => compileFile(file, input))
+      )
+    );
+
+    console.log("\nDone 🚀");
+  });
+
+program.parse();

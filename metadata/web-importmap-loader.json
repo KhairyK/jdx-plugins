@@ -20,9 +20,11 @@
   },
   "homepage": "https://github.com/KhairyK/jdx-plugins/blob/main/plugins/importmap-loader/README.md",
   "sideEffects": false,
-  "dist": {
-    "tarball": "https://jdx-registry.opendnf.cloud/t/web-importmap-loader-0.1.0.tgz",
-    "shasum": "bdc4978e8a381eb3c64dfa500b9450b5e7896813",
-    "integrity": "sha512-d7+LfqD6U1GqH6k7OYgpY2k4R4DtxxNorV3H4GNoaxaNGaBlHr4LWl4y1r+maJ5HRLvqLCvYvA3AJmwJKZZGug=="
-  }
+  "versions": {
+    "0.1.0": {
+      "file": "web-importmap-loader-0.1.0.tgz",
+      "integrity": "sha512-d7+LfqD6U1GqH6k7OYgpY2k4R4DtxxNorV3H4GNoaxaNGaBlHr4LWl4y1r+maJ5HRLvqLCvYvA3AJmwJKZZGug=="
+    }
+  },
+  "latest": "0.1.0"
 }
