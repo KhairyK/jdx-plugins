@@ -1,6 +1,6 @@
 {
   "name": "jdx-cli",
-  "version": "0.014.20260303",
+  "version": "0.014.20260304",
   "description": "CLI tools for JDX Plugins. Not intended for NPM publishing.",
   "private": true,
   "type": "module",
